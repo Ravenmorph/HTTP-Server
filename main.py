@@ -1,4 +1,24 @@
 import socket
+
+def parse_request(request_data):
+    lines = request_data.split('\r\n')
+    start_line = lines[0] 
+    method, path, version = start_line.split(' ')
+    return method, path, version
+
+# returns http response for a given path
+def get_reponse(path):
+    #mapping paths to their responses
+    responses = {
+        "/": "HTTP/1.1 200 OK\r\n\r\n",
+    } 
+
+    # default response if path not found
+    default_response = "HTTP/1.1 404 Not Found\r\n\r\n"
+
+    return responses.get(path, default_response)
+
+
 def handle_request(client_socket):
     #read data from client
     client_socket.recv(1024) # reading a bit of data
