@@ -20,11 +20,16 @@ def get_reponse(path):
 
 
 def handle_request(client_socket):
-    #read data from client
-    client_socket.recv(1024) # reading a bit of data
+    # Read data from client
+    request_data = client_socket.recv(1024).decode('utf-8')
 
-    # send a 200 OK response
-    response = "HTTP/1.1 200 OK\r\n\r\n"
+    # Parse the request
+    method, path, version = parse_request(request_data)
+
+    # Get the appropriate response
+    response = get_response(path)
+
+    # Send the response
     client_socket.send(response.encode())
 
 def main():
