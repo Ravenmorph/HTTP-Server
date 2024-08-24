@@ -7,7 +7,7 @@ def parse_request(request_data):
     return method, path, version
 
 # returns http response for a given path
-def get_reponse(path):
+def get_response(path):
     #mapping paths to their responses
     responses = {
         "/": "HTTP/1.1 200 OK\r\n\r\n",
